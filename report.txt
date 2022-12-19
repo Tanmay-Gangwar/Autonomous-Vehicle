@@ -1,0 +1,14 @@
+Tanmay - 2020CS10399
+Shivam Singh - 2020CS10383
+
+estimator.py:
+For estimator, the main idea was using HMM model i.e., assuming at any time t, we have a good probability distribution of the belief of cars. And with the sensor, we get new estimate and using pdf created a new probability distribution based only on sensor's information.
+Now final task is to combine both the initial probability distribution and probability distribution formed from the sensor's information to get posterior distribution.
+This is done by using using transition probability to find likelihood of the car on each cell and taking their product. After normalizing this gives the belief of car on each cell.
+
+intelligenDriver.py:
+First task was to make car move toward the goal.
+For this we created a bfs tree in the grid from all the checkpoints. This gives the distance of all the cells to the checkpoint.
+After this we created a new probability distribution which determines what's the probability of any car being on the given cell. This is done by taking transition probability into account so that the square in which car is going, has the least probability of having stdCar. Finally, for getting the safety belief of the cell for the car, product of all the (1 - probabilities) is taken.
+Now, being set with the safety of all the cells, car checks in all the directions (from -90 to 90) to find the square which is safe as well as close to checkpoint. If there is no safe square then it check which square has same distance and is safe. Again if no safe square is found then last option is to stop and hope that there is no collision.
+Finally when a checkpoint is reached, it does same for next checkpoint and so on.
